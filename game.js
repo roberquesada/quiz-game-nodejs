@@ -1,57 +1,5 @@
-var Question = function () {
-  this.id = 0;
-  this.allQuestions = [];
-}
-
-Question.prototype.add = function(question, answer, points) {
-  this.allQuestions.push({
-    'id': ++this.id,
-    'question': question,
-    'answer': answer,
-    'point': points
-  });
-}
-
-var Quiz = function (questions) {
-  this.currentQuestion = 1;
-  this.questions = questions;
-  this.totalPoints = 0;
-}
-
-Quiz.prototype.filterById = function(currentQuestion) {
-
-  var result = this.questions.filter(function(obj){
-    if ('id' in obj && typeof(obj.id) === 'number' && obj.id === currentQuestion) {
-      return true;
-    } else {
-      return false;
-    }
-  });
-
-  return result;
-}
-
-Quiz.prototype.getQuestion = function() {
-  return this.filterById(this.currentQuestion)[0];
-}
-
-Quiz.prototype.next = function() {
-  ++this.currentQuestion;
-}
-
-Quiz.prototype.initialPrint = function() {
-  console.log('\n############################');
-  console.log('#-- WELCOME TO QUIZ GAME --#');
-  console.log('############################\n');
-  this.questionPrint();
-}
-
-Quiz.prototype.questionPrint = function() {
-  console.log('---------------------------------');
-  console.log('Question N.' + currentQuestion.id + ' / Question points: ' + currentQuestion.point)
-  console.log(currentQuestion.question);
-  console.log('---------------------------------');
-}
+var Quiz = require('./quiz.js');
+var Question = require('./question.js');
 
 
 var questions = new Question();
