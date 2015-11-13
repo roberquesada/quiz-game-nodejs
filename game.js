@@ -39,22 +39,31 @@ Quiz.prototype.next = function() {
   ++this.currentQuestion;
 }
 
+Quiz.prototype.initialPrint = function() {
+  console.log('\n############################');
+  console.log('#-- WELCOME TO QUIZ GAME --#');
+  console.log('############################\n');
+  this.questionPrint();
+}
+
+Quiz.prototype.questionPrint = function() {
+  console.log('---------------------------------');
+  console.log('Question N.' + currentQuestion.id + ' / Question points: ' + currentQuestion.point)
+  console.log(currentQuestion.question);
+  console.log('---------------------------------');
+}
+
 
 var questions = new Question();
 questions.add('¿En que año estamos?', '2015', 5);
 questions.add('¿Como llaman a Raul en casa?', 'pompe', 5);
-questions.add('¿De que color es el caballo blanco de Santiago?', 'blanco', 5);
+questions.add('¿De que color es el caballo blanco como la leche de Santiago?', 'blanco como la leche', 5);
 
 var quiz = new Quiz(questions.allQuestions);
 var currentQuestion = quiz.getQuestion();
 
-console.log('###############################');
-console.log('#-- WELCOME TO QUIZ GAME --#');
-console.log('###############################\n');
-console.log('---------------------------------');
-console.log('Question N.' + currentQuestion.id + '/ Points: ' + currentQuestion.points)
-console.log(currentQuestion.question)
-console.log('---------------------------------');
+quiz.initialPrint();
+
 
 // Prompt
 process.stdin.on('data', function (data) {
@@ -70,11 +79,9 @@ process.stdin.on('data', function (data) {
   } else {
     console.log('\nRespuesta incorrecta\n');
   }
-  console.log('---------------------------------');
-  console.log('Pregunta ' + currentQuestion.id);
-  console.log(currentQuestion.question);
-  console.log('---------------------------------');
 
+  quiz.questionPrint();
+  
 
 });
 
